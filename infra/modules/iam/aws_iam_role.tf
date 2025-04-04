@@ -1,5 +1,6 @@
-resource "aws_iam_role" "app_runner_service_role" {
-  name = "app-runner-service-role"
+# Lambda オーソライザー関数の IAM ロール
+resource "aws_iam_role" "lambda_authorizer_role" {
+  name = "lambda_authorizer_role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -8,12 +9,9 @@ resource "aws_iam_role" "app_runner_service_role" {
         Action = "sts:AssumeRole"
         Effect = "Allow"
         Principal = {
-          Service = "build.apprunner.amazonaws.com"
+          Service = "lambda.amazonaws.com"
         }
       }
     ]
   })
-  tags = {
-    Name = "${var.app_name}-lambda-iam-role"
-  }
 }
