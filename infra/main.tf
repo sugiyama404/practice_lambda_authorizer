@@ -20,9 +20,11 @@ module "iam" {
 
 # Lambda
 module "lambda" {
-  source                         = "./modules/lambda"
-  app_name                       = var.app_name
-  lambda_authorizer_iam_role_arn = module.iam.lambda_authorizer_iam_role_arn
+  source                                       = "./modules/lambda"
+  app_name                                     = var.app_name
+  lambda_authorizer_iam_role_arn               = module.iam.lambda_authorizer_iam_role_arn
+  apigatewayv2_api_http_api_execution_arn      = module.apigateway.apigatewayv2_api_http_api_execution_arn
+  apigatewayv2_authorizer_lambda_authorizer_id = module.apigateway.apigatewayv2_authorizer_lambda_authorizer_id
 }
 
 # API Gateway
