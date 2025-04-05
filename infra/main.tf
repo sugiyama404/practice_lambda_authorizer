@@ -18,24 +18,17 @@ module "iam" {
   app_name = var.app_name
 }
 
-# ECR
-module "ecr" {
-  source     = "./modules/ecr"
-  app_name   = var.app_name
-  image_name = var.image_name
+# Lambda
+module "lambda" {
+  source                         = "./modules/lambda"
+  app_name                       = var.app_name
+  lambda_authorizer_iam_role_arn = module.iam.lambda_authorizer_iam_role_arn
 }
 
-# bash
-module "bash" {
-  source     = "./modules/bash"
-  region     = var.region
-  image_name = var.image_name
-}
-
-# App Runner
-module "apprunner" {
-  source                  = "./modules/apprunner"
-  app_name                = var.app_name
-  web_repository_url      = module.ecr.web_repository_url
-  iam_role_app_runner_arn = module.iam.iam_role_app_runner_arn
+# API Gateway
+module "apigateway" {
+  source                               = "./modules/apigateway"
+  app_name                             = var.app_name
+  lambda_authorizer_invoke_arn         = module.lambda.lambda_authorizer_invoke_arn
+  lambda_protected_endpoint_invoke_arn = module.lambda.lambda_protected_endpoint_invoke_arn
 }

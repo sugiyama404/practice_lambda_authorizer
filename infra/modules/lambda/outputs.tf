@@ -1,3 +1,8 @@
-output "iam_role_app_runner_arn" {
-  value = aws_iam_role.app_runner_service_role.arn
+output "lambda_authorizer_invoke_arn" {
+  value = aws_lambda_function.authorizer.invoke_arn
 }
+
+output "lambda_protected_endpoint_invoke_arn" {
+  value = aws_lambda_function.protected_endpoint.invoke_arn
+}
+

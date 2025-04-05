@@ -1,3 +1,3 @@
-output "iam_role_app_runner_arn" {
-  value = aws_iam_role.app_runner_service_role.arn
+output "lambda_authorizer_iam_role_arn" {
+  value = aws_iam_role.lambda_authorizer_role.arn
 }

@@ -9,9 +9,3 @@ variable "region" {
   type        = string
   default     = "ap-northeast-1"
 }
-
-variable "image_name" {
-  description = "application name"
-  type        = string
-  default     = "chatbot"
-}
